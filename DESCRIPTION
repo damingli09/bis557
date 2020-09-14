@@ -1,15 +1,19 @@
 Package: bis557
 Type: Package
 Title: Package for homework 1 of BIS557 Computational Statistics
-Version: 0.1.0
-Author: Daming Li
-Maintainer: Daming Li <daming.li@yale.edu>
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
-License: What license is it under?
+Version: 0.0.1
+Authors@R: 
+    person(given = "Daming",
+            family = "Li",
+            role = c("aut", "cre"),
+            email = "daming.li@yale.edu")
+Description: Implements homework solutions for BIS557.
+License: LGPL (>= 2.1)
 Encoding: UTF-8
 LazyData: true
 Suggests: 
     testthat
 Depends: 
     R (>= 2.10)
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.1.1

@@ -1,8 +1,12 @@
-# Hello, world!  This is an example function named 'hello' which prints 'Hello, world!'.  You can learn more
-# about package authoring with RStudio at: http://r-pkgs.had.co.nz/ Some useful keyboard shortcuts for package
-# authoring: Install Package: 'Cmd + Shift + B' Check Package: 'Cmd + Shift + E' Test Package: 'Cmd + Shift +
-# T'
+#' @title Fits linear model
+#' @description Fits linear model using built-in lm function
+#' @param f the formula
+#' @param df the dataframe
+#' @param constrasts list of variables as input
+#' @example 
+#' fit <- linear_model(Sepal.Length ~ ., iris, contrasts = list(Species = "contr.sum"))
+#' @export
 
-linear_model <- function() {
-    print("Hello, world!")
+linear_model <- function(f, df, constrasts=NULL) {
+    lm(f, df, contrasts)
 }
