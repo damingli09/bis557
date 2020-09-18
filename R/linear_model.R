@@ -1,8 +1,8 @@
 #' @title Fits linear model
 #' @description Fits linear model by solving normal equation
-#' @param form a formula object
-#' @param dat a dataframe
-#' @param constrasts list of variables as input
+#' @param form the input formula object
+#' @param dat the input dataframe
+#' @param constrasts list of contrasts for factor input
 #' @example 
 #' fit <- linear_model(Sepal.Length ~ ., iris, contrasts = list(Species = "contr.sum"))
 #' print(fit)
@@ -25,6 +25,6 @@ linear_model <- function(form, dat, contrasts=NULL){
     names(betas) <- betas_name
     
     res <- list(coefficients = betas)
-    #lass(res) <- "my_lm"
+    #class(res) <- "my_lm"
     res
 }

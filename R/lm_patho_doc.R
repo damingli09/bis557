@@ -1,4 +1,4 @@
-#' A toy dataset for homework of BIS557
+#' A toy dataset for testing the numerical stability of linear_model implementation.
 #' @format A dataframe with 2 rows and 3 variables:
 #' \describe{
 #'   \item{y}{y}

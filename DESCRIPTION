@@ -1,13 +1,13 @@
 Package: bis557
 Type: Package
-Title: Package for homework 1 of BIS557 Computational Statistics
+Title: Package for homework of BIS557 Computational Statistics
 Version: 0.0.1
 Authors@R: 
     person(given = "Daming",
             family = "Li",
             role = c("aut", "cre"),
             email = "daming.li@yale.edu")
-Description: Implements homework solutions for BIS557.
+Description: Implements homework solutions for BIS557 course.
 License: LGPL (>= 2.1)
 Encoding: UTF-8
 LazyData: true
