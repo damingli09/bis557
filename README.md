@@ -5,6 +5,10 @@
 
 <!-- badges: start -->
 
+[![Travis build
+status](https://travis-ci.com/damingli09/bis557.svg?branch=master)](https://travis-ci.com/damingli09/bis557)
+[![Codecov test
+coverage](https://codecov.io/gh/damingli09/bis557/branch/master/graph/badge.svg)](https://codecov.io/gh/damingli09/bis557?branch=master)
 <!-- badges: end -->
 
 This package consists of implementations of various algorithms covered
