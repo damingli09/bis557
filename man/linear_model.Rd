@@ -4,15 +4,15 @@
 \alias{linear_model}
 \title{Fits linear model}
 \usage{
-linear_model(f, df, constrasts = NULL)
+linear_model(form, dat, contrasts = NULL)
 }
 \arguments{
-\item{f}{the formula}
+\item{form}{the input formula object}
 
-\item{df}{the dataframe}
+\item{dat}{the input dataframe}
 
-\item{constrasts}{list of variables as input}
+\item{constrasts}{list of contrasts for factor input}
 }
 \description{
-Fits linear model using built-in lm function
+Fits linear model by solving normal equation
 }
