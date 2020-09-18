@@ -1,5 +1,5 @@
 ---
-title: "my-vignette"
+title: "Package bis557"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{my-vignette}
@@ -16,4 +16,12 @@ knitr::opts_chunk$set(
 
 ```{r setup}
 library(bis557)
+```
+
+## Examples of fitting linear models
+
+```{r}
+data(iris)
+fit <- linear_model(Sepal.Length ~ ., iris)
+print(fit)
 ```

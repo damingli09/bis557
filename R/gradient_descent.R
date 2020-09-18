@@ -6,7 +6,7 @@
 #' @param tol the numerical tolerance
 #' @param iter the maximum iterations
 #' @example 
-#' fit <- gradient_descent(Sepal.Length ~ ., iris, contrasts = list(Species = "contr.sum"))
+#' fit <- gradient_descent(Sepal.Length ~ ., iris)
 #' print(fit)
 #' @export
 
@@ -20,6 +20,10 @@ gradient_descent <- function(form, dat, gamma=0.1, tol=1e-5, iter=100000){
     betas_tmp <- betas - (gamma * (1/N) * (t(X) %*% (X %*% betas - y)))
     error <- sqrt(sum((betas_tmp-betas)^2))
     betas <- betas_tmp
+    if (is.na(betas)){
+      print("Gradient descent failed.")
+      break
+    }
     if (error<=tol){
       break
     }
