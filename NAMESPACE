@@ -2,3 +2,5 @@
 
 export(gradient_descent)
 export(linear_model)
+export(my_Ridge)
+export(optimal_lambda)

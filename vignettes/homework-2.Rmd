@@ -1,0 +1,106 @@
+---
+title: "homework-2"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{homework-2}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+## CASL 2.11 Exercises problem number 5.
+
+Denote data points as $(x_i, y_i)$ with $i=1..n$. Then the design matrix $X$ is written as 
+$$
+\begin{pmatrix}
+1 & x_1\\ 
+\vdots  & \vdots \\ 
+1 & x_n
+\end{pmatrix}
+$$
+Then 
+$$
+X^TX = \begin{pmatrix}
+n & \sum_i x_i\\ 
+\sum_i x_i  & \sum_i x_i^2 
+\end{pmatrix}
+$$
+Its inverse
+$$
+(X^TX)^{-1} = \frac{1}{n\sum_i x_i^2-(\sum_i x_i)^2}\begin{pmatrix}
+\sum_i x_i^2 & -\sum_i x_i\\ 
+-\sum_i x_i  & n 
+\end{pmatrix}
+$$
+Then the estimator $\hat{\beta}$ is given by
+$$
+\begin{split}
+\hat{\beta}=(X^TX)^{-1}X^Ty 
+&= \frac{1}{n\sum_i x_i^2-(\sum_i x_i)^2}\begin{pmatrix}
+\sum_i x_i^2 & -\sum_i x_i\\ 
+-\sum_i x_i  & n 
+\end{pmatrix} 
+\begin{pmatrix}
+1 & ... & 1\\ 
+x_1  & ... & x_n 
+\end{pmatrix} 
+\begin{pmatrix}
+y_1 \\ 
+\vdots  \\
+y_n 
+\end{pmatrix} \\
+&= \frac{1}{n\sum_i x_i^2-(\sum_i x_i)^2}\begin{pmatrix}
+\sum_i x_i^2 & -\sum_i x_i\\ 
+-\sum_i x_i  & n 
+\end{pmatrix} 
+\begin{pmatrix}
+\sum_i y_i \\ 
+\sum_i x_iy_i 
+\end{pmatrix} \\
+&=\frac{1}{n\sum_i x_i^2-(\sum_i x_i)^2}\begin{pmatrix}
+(\sum_i x_i^2)(\sum_i y_i) -(\sum_i x_i)(\sum_i x_iy_i)\\ 
+-(\sum_i x_i)(\sum_i y_i)  + n (\sum_i x_iy_i)
+\end{pmatrix} \\
+&=\frac{1}{\sum_i (x_i-\bar{x})^2}\begin{pmatrix}
+(\sum_i x_i^2)(\sum_i y_i) -(\sum_i x_i)(\sum_i x_iy_i)\\ 
+\sum_i (x_i-\bar{x})(y_i-\bar{y})
+\end{pmatrix}
+\end{split}
+$$
+Then we have $\hat{\beta_0}=\frac{(\sum_i x_i^2)(\sum_i y_i) -(\sum_i x_i)(\sum_i x_iy_i)}{\sum_i (x_i-\bar{x})^2}$ and $\hat{\beta_0}=\frac{\sum_i (x_i-\bar{x})(y_i-\bar{y})}{\sum_i (x_i-\bar{x})^2}$.
+
+
+
+## Question 5
+
+Assume that the design matrix is normalized beforehand. The LASSO penalty can be expanded into a summation of cost functions for each predictor:
+$$
+\begin{aligned}
+f(\beta)&=\frac{1}{2n} ||Y - X \beta||_2^2 + \lambda ||\beta||_1 \\
+&=\frac{1}{2n}(Y^TY+\beta^TX^TX\beta-2\beta^TX^TY) + \lambda ||\beta||_1 \\
+&=\frac{1}{2n}Y^TY + \sum_j(\frac{1}{2n}\beta_j^2-\frac{1}{2n}2\beta_jX_j^TY+\lambda|\beta_j|)
+\end{aligned}
+$$
+When $\beta_j\geq0$, the cost function associated with predictor $j$ is given by
+
+$$
+f_j(\beta_j)=\frac{1}{2n}\beta_j^2+\beta_j(\lambda-\frac{1}{n}X_j^TY)
+$$
+
+Setting its derivative to 0 gives $\beta_j=X_j^TY-n\lambda$ when $\lambda\leq\frac{1}{n}X_j^TY$. On the other hand, if $\lambda\geq\frac{1}{n}X_j^TY$, we must have $\beta_j=0$.
+
+Similarly, if When $\beta_j\leq0$, we would have the estimate $\beta_j=X_j^TY+n\lambda$ when $\lambda\geq\frac{1}{n}X_j^TY$. On the other hand, if $\lambda\geq-\frac{1}{n}X_j^TY$, we must have $\beta_j=0$.
+
+Taking these two scenarios into account, we conclude that if $|X_j^TY| \leq n \lambda$, then $\widehat \beta^{\text{LASSO}}$ must be zero.
+
+
+
+```{r setup}
+library(bis557)
+```
