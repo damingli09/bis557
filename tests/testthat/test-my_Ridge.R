@@ -5,7 +5,7 @@ context("Test the output of ridge regression.")
 
 test_that("You my_ridge() function handles collinearity well.", {
 
-  n <- 400
+  n <- 500
   p <- 5
   beta <- c(1, 2,-1, 0,-2)
   X <- matrix(rnorm(n*p), nrow=n, ncol = p)
