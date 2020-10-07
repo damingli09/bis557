@@ -91,7 +91,19 @@ print(fit_gradient_descent_outofsample$coefficients)
 ```
 
 ## Question 3
+Here a toy dataset is created and collinearity is added by hand.
 
+```{r}
+n <- 500
+p <- 5
+beta <- c(1, 2,-1, 0,-2)  # the actual coefficients
+X <- matrix(rnorm(n*p), nrow=n, ncol = p)
+X[,1] <- X[,1]*0.05 + X[,2]*0.95  # make 1st and 2nd columns collinear
+y <- X %*% beta + rnorm(n)
+
+fit_my_rdige <- my_Ridge(X, y, lambda=1.0)
+print(fit_my_rdige$coefficients)  # print the fitted coefficients
+```
 
 ## Question 4
 Here cross-validation is used to select the best lambda with my_Ridge function:
