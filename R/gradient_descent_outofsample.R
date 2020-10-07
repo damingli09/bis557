@@ -10,7 +10,7 @@
 #' print(fit)
 #' @export
 
-gradient_descent_outofsample <- function(form, dat, gamma=0.1, tol=1e-3, iter=100000){
+gradient_descent_outofsample <- function(form, dat, gamma=0.1, tol=1e-2, iter=10000){
   X <- model.matrix(form,dat)
   y <- model.frame(form,dat)[,1]
 

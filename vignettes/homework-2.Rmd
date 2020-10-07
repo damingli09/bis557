@@ -14,6 +14,10 @@ knitr::opts_chunk$set(
 )
 ```
 
+```{r setup}
+library(bis557)
+```
+
 ## CASL 2.11 Exercises problem number 5.
 
 Denote data points as $(x_i, y_i)$ with $i=1..n$. Then the design matrix $X$ is written as 
@@ -75,6 +79,32 @@ y_n
 $$
 Then we have $\hat{\beta_0}=\frac{(\sum_i x_i^2)(\sum_i y_i) -(\sum_i x_i)(\sum_i x_iy_i)}{\sum_i (x_i-\bar{x})^2}$ and $\hat{\beta_0}=\frac{\sum_i (x_i-\bar{x})(y_i-\bar{y})}{\sum_i (x_i-\bar{x})^2}$.
 
+## Question 2
+Here we compare the fitted parameters using gradient_descent.R and gradient_descent_outofsample.R, and notice that the results are close but different:
+
+```{r, warning=FALSE}
+data(iris)
+fit_gradient_descent <- gradient_descent(Sepal.Length ~ Petal.Width, iris)
+print(fit_gradient_descent$coefficients)
+fit_gradient_descent_outofsample <- gradient_descent_outofsample(Sepal.Length ~ Petal.Width, iris)
+print(fit_gradient_descent_outofsample$coefficients)
+```
+
+## Question 3
+
+
+## Question 4
+Here cross-validation is used to select the best lambda with my_Ridge function:
+```{r}
+n <- 500
+p <- 5
+beta <- c(1, 2,-1, 0,-2)
+X <- matrix(rnorm(n*p), nrow=n, ncol = p)
+X[,1] <- X[,1]*0.1 + X[,2]*0.9  
+y <- X %*% beta + rnorm(n)
+lambda_optim <- optimal_lambda(X, y, lambda=seq(0.1,10,by=0.5), n=5)
+print(lambda_optim)
+```
 
 
 ## Question 5
@@ -101,6 +131,4 @@ Taking these two scenarios into account, we conclude that if $|X_j^TY| \leq n \l
 
 
 
-```{r setup}
-library(bis557)
-```
+
