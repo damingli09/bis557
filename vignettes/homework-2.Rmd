@@ -16,6 +16,7 @@ knitr::opts_chunk$set(
 
 ```{r setup}
 library(bis557)
+devtools::load_all()
 ```
 
 ## CASL 2.11 Exercises problem number 5.

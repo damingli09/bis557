@@ -16,6 +16,7 @@ knitr::opts_chunk$set(
 
 ```{r setup}
 library(bis557)
+devtools::load_all()
 ```
 
 ## Problem 1
@@ -92,8 +93,10 @@ y <- argmax(z)
 Then I fit data using the implemented softmaxreg function.
 
 ```{r}
-fit <- softmaxreg(X=X,y=y,lrate=0.01, maxiter=10000, tol=1e-4)
+fit <- softmaxreg(X=X,y=y,lrate=0.001, maxiter=10000, tol=1e-4)
 print(fit)
 ```
+ 
+ There is an issue.
  
 
