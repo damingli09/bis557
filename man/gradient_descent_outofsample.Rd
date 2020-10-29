@@ -4,7 +4,7 @@
 \alias{gradient_descent_outofsample}
 \title{Gradient descent based on out of sample accuracy}
 \usage{
-gradient_descent_outofsample(form, dat, gamma = 0.1, tol = 0.001, iter = 1e+05)
+gradient_descent_outofsample(form, dat, gamma = 0.1, tol = 0.01, iter = 10000)
 }
 \arguments{
 \item{form}{the input formula object}
