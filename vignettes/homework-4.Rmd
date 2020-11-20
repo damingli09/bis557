@@ -1,0 +1,111 @@
+---
+title: "homework-4"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{homework-4}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(bis557)
+devtools::load_all()
+```
+
+The three functions for the following three problems were all implemented in the file "pyregression.py", under the name "pyridge", "onlineLR", and "pylasso" respectively.
+
+## 1.
+
+```{r}
+library(reticulate)
+use_python("//anaconda3/envs/bis557/bin/python")
+setwd("/Users/damingli/Documents/Courses/Computational statistics/homework-1/bis557")
+reticulate::source_python("pyregression.py")
+```
+Here we make a toy dataset with collinearity.
+
+Output with R code:
+
+```{r}
+n <- 500
+p <- 5
+beta <- c(1, 2,-1, 0,-2)
+X <- matrix(rnorm(n*p), nrow=n, ncol = p)
+X[,1] <- X[,1]*0.05 + X[,2]*0.95  # make 1st and 2nd columns collinear
+y <- X %*% beta + rnorm(n)
+
+fit_my_rdige <- my_Ridge(X, y, lambda=1.0)
+print(fit_my_rdige$coefficients)
+```
+
+Output with python code:
+
+```{python}
+import numpy as np
+n = 500
+p = 5
+X = np.random.randn(n,p)
+X[:,0] = X[:,0]*0.05 + X[:,1]*0.95
+betas = np.array([1,2,-1,0,-2])  # true coefficients
+y = X.dot(betas) + np.random.randn(n)
+
+pyridge(X,y,l=1.0)
+```
+
+They match very well.
+
+## 2.
+
+The following code is equivalent to stochastic gradient descent with batch size 1.
+
+```{python}
+import numpy as np
+# create a dataset
+n = 10000
+p = 5
+X = np.random.randn(n,p)
+betas = np.array([1,2,-1,0,-2])  # true coefficients
+y = X.dot(betas) + np.random.randn(n)
+# feed the dataset in stream
+betas = np.zeros(5)
+intercept = 0
+for i in range(n):
+  betas, intercept = onlineLR(X[i,:], y[i], betas, intercept, eta=0.01)
+print(betas, intercept)
+```
+
+The fitted coefficients are very accurate.
+
+## 3.
+
+Similar to the testing process:
+
+```{python}
+import numpy as np
+n = 500
+p = 5
+X = np.random.randn(n,p)
+X[:,0] = X[:,0]*0.05 + X[:,1]*0.95
+betas = np.array([1,2,-1,0,-2])  # true coefficients
+y = X.dot(betas) + np.random.randn(n)
+
+pylasso(X,y,l=1.0)
+```
+
+The fitted coefficients are very good.
+
+## 4.
+
+Proposing a project:
+
+Title: Effects of dimensionality and choice of distance metrics on the accuracy and stability of kmeans algorithm
+
+Background: This topic is slightly different from the materials covered in BIS557, but is highly relevant in terms of methodology. At a first place, statistical softwares implementing kmeans algorithm with custom distance metrics are largely missing. Therefore, the first step is to build a package for this purpose using standard EM algorithm. Next, there are many directions to explore the algorithm: 1) how do distance metrics affect convergence? 2) how does the algorithm with different distance metrics perform as the dimensionality of data increases? 3) how to choose the optimal k?
+
